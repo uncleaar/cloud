@@ -34,52 +34,54 @@ const LoginPage: FC = () => {
       <div className={styles.left}>
         <Image src={LoginImg} preview={false} />
       </div>
-      <div className={styles.form}>
-        <div className={styles.title}>
-          <LogoSvg />
+      <div className={styles.right}>
+        <div className={styles.form}>
+          <div className={styles.title}>
+            <LogoSvg />
 
-          <Typography.Title level={4}>Sign into your account</Typography.Title>
-        </div>
+            <Typography.Title level={4}>Sign in into your account</Typography.Title>
+          </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className={styles.form_inner}>
-          <Controller
-            control={control}
-            name='email'
-            render={({ field }) => (
-              <Input
-                {...field}
-                size='large'
-                addonAfter={<EmailSvg />}
-                placeholder='email'
-                type='email'
-              />
-            )}
-          />
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.form_inner}>
+            <Controller
+              control={control}
+              name='email'
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  size='large'
+                  addonAfter={<EmailSvg />}
+                  placeholder='email'
+                  type='email'
+                />
+              )}
+            />
 
-          <Controller
-            control={control}
-            name='password'
-            render={({ field }) => (
-              <Input
-                {...field}
-                size='large'
-                addonAfter={<PasswordSvg />}
-                placeholder='password'
-                type='password'
-              />
-            )}
-          />
+            <Controller
+              control={control}
+              name='password'
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  size='large'
+                  addonAfter={<PasswordSvg />}
+                  placeholder='password'
+                  type='password'
+                />
+              )}
+            />
 
-          <Button className={styles.btn} size='large' htmlType='submit'>
-            Sign in
+            <Button className={styles.btn} size='large' htmlType='submit'>
+              Sign up
+            </Button>
+          </form>
+
+          <Divider className={styles.divider}>OR</Divider>
+
+          <Button className={styles.btn_sign} size='large'>
+            Sign up
           </Button>
-        </form>
-
-        <Divider className={styles.divider}>OR</Divider>
-
-        <Button className={styles.btn_sign} size='large'>
-          Sign up
-        </Button>
+        </div>
       </div>
     </div>
   );
