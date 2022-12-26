@@ -23,6 +23,9 @@
       "@shared/*": [
         "./shared/*"
       ],
+       "@shared/validation": [
+        "./shared/validation"
+      ],
     }
   },
   "include": [
