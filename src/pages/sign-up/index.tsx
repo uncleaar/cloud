@@ -5,7 +5,7 @@ import { EmailSvg, LogoSvg, PasswordSvg } from '@shared/ui';
 
 import RegisterImg from '../../app/assets/images/register.png';
 
-import { useLoginUserMutation } from '@shared/api/auth';
+import { useRegisterUserMutation } from '@shared/api/auth';
 
 import styles from './SignUp.module.scss';
 import { User } from 'types';
@@ -17,10 +17,10 @@ import { RegisterInput, registerSchema } from '@shared/validation';
 type RegisterUser = {
   email: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  name: string;
+  surname: string;
+  patronymic: string;
   passwordConfirm: string;
-  middleName: string;
 };
 
 const RegisterPage: FC = () => {
@@ -28,10 +28,10 @@ const RegisterPage: FC = () => {
     resolver: zodResolver(registerSchema)
   });
 
-  const [loginUser, { isLoading, isError, error, isSuccess }] = useLoginUserMutation();
+  const [registerUser, { isLoading, isError, error, isSuccess }] = useRegisterUserMutation();
 
   const { register, handleSubmit, control } = methods;
-  const onSubmit: SubmitHandler<RegisterUser> = (data) => loginUser(data);
+  const onSubmit: SubmitHandler<RegisterUser> = (data) => registerUser(data);
 
   return (
     <div className={styles.sign_up}>
@@ -45,7 +45,7 @@ const RegisterPage: FC = () => {
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form_inner}>
             <Controller
               control={control}
-              name='firstName'
+              name='name'
               render={({ field }) => (
                 <Input {...field} size='large' placeholder='First Name' type='text' />
               )}
@@ -53,7 +53,7 @@ const RegisterPage: FC = () => {
 
             <Controller
               control={control}
-              name='lastName'
+              name='surname'
               render={({ field }) => (
                 <Input {...field} size='large' placeholder='Last Name' type='text' />
               )}
@@ -61,7 +61,7 @@ const RegisterPage: FC = () => {
 
             <Controller
               control={control}
-              name='middleName'
+              name='patronymic'
               render={({ field }) => (
                 <Input {...field} size='large' placeholder='Middle Name' type='text' />
               )}

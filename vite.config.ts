@@ -10,7 +10,8 @@ export default defineConfig({
     alias: {
       '@shared': path.resolve(__dirname, './src/shared'),
       '@shared/*': path.resolve(__dirname, './src/shared'),
-      '@shared/validation': path.resolve(__dirname, './src/shared/validation')
+      '@shared/validation': path.resolve(__dirname, './src/shared/validation'),
+      '@widgets': path.resolve(__dirname, './src/widgets')
     }
   }
 });

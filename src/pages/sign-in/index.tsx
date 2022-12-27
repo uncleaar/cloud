@@ -1,18 +1,19 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Input, Image, Typography, Button, Divider, Form } from 'antd';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { zodResolver } from '@hookform/resolvers/zod';
+
 import { EmailSvg, LogoSvg, PasswordSvg } from '@shared/ui';
-
+import { LoginInput, loginSchema } from '@shared/validation';
 import LoginImg from '../../app/assets/images/login.png';
-
 import { useLoginUserMutation } from '@shared/api/auth';
 
 import styles from './SignIn.module.scss';
 import { User } from 'types';
-import { useForm } from 'react-hook-form';
-import { SubmitHandler } from 'react-hook-form';
-import { Controller } from 'react-hook-form';
-import { LoginInput, loginSchema } from '@shared/validation';
 
 type LoginUser = {
   email: string;
@@ -20,13 +21,50 @@ type LoginUser = {
 };
 
 const LoginPage: FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const methods = useForm<LoginInput>({
     resolver: zodResolver(loginSchema)
   });
 
+  const {
+    register,
+    reset,
+    handleSubmit,
+    control,
+    formState: { isSubmitSuccessful }
+  } = methods;
+
   const [loginUser, { isLoading, isError, error, isSuccess }] = useLoginUserMutation();
 
-  const { register, handleSubmit, control } = methods;
+  const from = ((location.state as any)?.from.pathname as string) || '/';
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('You successfully logged in');
+      navigate(from);
+    }
+    if (isError) {
+      if (Array.isArray((error as any).data.error)) {
+        (error as any).data.error.forEach((el: any) =>
+          toast.error(el.message, {
+            position: 'top-right'
+          })
+        );
+      } else {
+        toast.error((error as any).data.message, {
+          position: 'top-right'
+        });
+      }
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful]);
+
   const onSubmit: SubmitHandler<LoginUser> = (data) => loginUser(data);
 
   return (
@@ -71,7 +109,7 @@ const LoginPage: FC = () => {
               )}
             />
 
-            <Button className={styles.btn} size='large' htmlType='submit'>
+            <Button className={styles.btn} size='large' htmlType='submit' loading={isLoading}>
               Sign up
             </Button>
           </form>

@@ -1,9 +1,15 @@
 import React from 'react';
+import { FC } from 'react';
 
-export const LogoSvg = () => (
+type LogoProps = {
+  width?: any;
+  height?: any;
+};
+
+export const LogoSvg: FC<LogoProps> = ({ width = 100, height = 100 }) => (
   <svg
-    width='94px'
-    height='94px'
+    width={width}
+    height={height}
     viewBox='0 0 64 64'
     xmlns='http://www.w3.org/2000/svg'
     aria-hidden='true'

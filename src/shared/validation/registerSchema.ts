@@ -1,9 +1,9 @@
 import { object, string, TypeOf } from 'zod';
 
 export const registerSchema = object({
-  firstName: string().min(1, 'First name is required').max(100),
-  lastName: string().min(1, 'Last name is required').max(100),
-  middleName: string().min(1, 'Middle name is required').max(100),
+  name: string().min(1, 'First name is required').max(100),
+  surname: string().min(1, 'Last name is required').max(100),
+  patronymic: string().min(1, 'Middle name is required').max(100),
   email: string().min(1, 'Email address is required').email('Email Address is invalid'),
   password: string()
     .min(1, 'Password is required')

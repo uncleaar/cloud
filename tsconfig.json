@@ -26,6 +26,9 @@
        "@shared/validation": [
         "./shared/validation"
       ],
+      "@widgets": [
+        "./widgets"
+      ],
     }
   },
   "include": [
