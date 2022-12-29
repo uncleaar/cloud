@@ -7,13 +7,12 @@ import { Controller } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { EmailSvg, LogoSvg, PasswordSvg } from '@shared/ui';
+import { EmailSvg, InputField, LogoSvg, PasswordSvg } from '@shared/ui';
 import { LoginInput, loginSchema } from '@shared/validation';
 import LoginImg from '../../app/assets/images/login.png';
 import { useLoginUserMutation } from '@shared/api/auth';
 
 import styles from './SignIn.module.scss';
-import { User } from 'types';
 
 type LoginUser = {
   email: string;
@@ -32,10 +31,10 @@ const LoginPage: FC = () => {
     reset,
     handleSubmit,
     control,
-    formState: { isSubmitSuccessful }
+    formState: { isSubmitSuccessful, errors }
   } = methods;
 
-  const [loginUser, { isLoading, isError, error, isSuccess }] = useLoginUserMutation();
+  const [loginUser, { isLoading, isError, error, isSuccess, data }] = useLoginUserMutation();
 
   const from = ((location.state as any)?.from.pathname as string) || '/';
 
@@ -65,7 +64,11 @@ const LoginPage: FC = () => {
     }
   }, [isSubmitSuccessful]);
 
-  const onSubmit: SubmitHandler<LoginUser> = (data) => loginUser(data);
+  const onSubmit: SubmitHandler<LoginUser> = (data) => {
+    loginUser(data);
+  };
+
+  console.log(data, 'data');
 
   return (
     <div className={styles.sign_in}>
@@ -81,32 +84,24 @@ const LoginPage: FC = () => {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form_inner}>
-            <Controller
+            <InputField
               control={control}
               name='email'
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  size='large'
-                  addonAfter={<EmailSvg />}
-                  placeholder='email'
-                  type='email'
-                />
-              )}
+              icon={<EmailSvg />}
+              size='large'
+              placeholder='Email'
+              type='email'
+              errors={errors.email?.message}
             />
 
-            <Controller
+            <InputField
               control={control}
               name='password'
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  size='large'
-                  addonAfter={<PasswordSvg />}
-                  placeholder='password'
-                  type='password'
-                />
-              )}
+              icon={<PasswordSvg />}
+              size='large'
+              placeholder='Password'
+              type='password'
+              errors={errors.password?.message}
             />
 
             <Button className={styles.btn} size='large' htmlType='submit' loading={isLoading}>
