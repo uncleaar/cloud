@@ -1,50 +1,35 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { LoginInput, RegisterInput } from '@shared/validation';
-import { RootState } from 'app/store';
-import { Response } from 'types';
-import { user } from './user';
 
-const BASE_URL = 'http://localhost:8090/api/v1';
-
-export const auth = createApi({
-  reducerPath: 'auth',
+const BASE_URL = 'http://localhost:8090';
+export const authApi = createApi({
+  reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${BASE_URL}`,
-    headers: {
-      'Content-Type': 'application/json'
-    }
+    baseUrl: `${BASE_URL}/api/v1/authorizations`
   }),
   endpoints: (builder) => ({
     registerUser: builder.mutation<Response, RegisterInput>({
       query(data) {
         return {
-          url: '/authorizations/sign-up',
+          url: 'sign-up',
           method: 'POST',
           body: data
         };
       }
     }),
-    loginUser: builder.mutation<{ token: string; status: string }, LoginInput>({
+    loginUser: builder.mutation<
+      {
+        object: Object;
+        status: string;
+      },
+      LoginInput
+    >({
       query(data) {
         return {
-          url: '/authorizations/sign-in',
+          url: 'sign-in',
           method: 'POST',
           body: data,
           credentials: 'include'
-        };
-      },
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
-        try {
-          await queryFulfilled;
-          await dispatch(user.endpoints.getMe.initiate(null));
-        } catch (error) {}
-      }
-    }),
-    verifyEmail: builder.mutation<Response, { verificationCode: string }>({
-      query({ verificationCode }) {
-        return {
-          url: `verifyemail/${verificationCode}`,
-          method: 'GET'
         };
       }
     }),
@@ -59,4 +44,4 @@ export const auth = createApi({
   })
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation, useLogoutUserMutation } = auth;
+export const { useLoginUserMutation, useRegisterUserMutation, useLogoutUserMutation } = authApi;

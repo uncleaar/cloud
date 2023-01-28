@@ -8,14 +8,13 @@ import RegisterImg from '../../app/assets/images/register.png';
 import { useRegisterUserMutation } from '@shared/api/auth';
 
 import styles from './SignUp.module.scss';
-import { User } from 'types';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { RegisterInput, registerSchema } from '@shared/validation';
 
 type RegisterUser = {
-  email: string;
+  mail: string;
   password: string;
   name: string;
   surname: string;
@@ -68,9 +67,9 @@ const RegisterPage: FC = () => {
             />
             <Controller
               control={control}
-              name='email'
+              name='mail'
               render={({ field }) => (
-                <Input {...field} size='large' placeholder='Email' type='email' />
+                <Input {...field} size='large' placeholder='mail' type='email' />
               )}
             />
 

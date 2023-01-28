@@ -10,18 +10,25 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { EmailSvg, InputField, LogoSvg, PasswordSvg } from '@shared/ui';
 import { LoginInput, loginSchema } from '@shared/validation';
 import LoginImg from '../../app/assets/images/login.png';
-import { useLoginUserMutation } from '@shared/api/auth';
+import { useLoginUserMutation } from '@shared/api';
 
 import styles from './SignIn.module.scss';
+import { useAppDispatch } from '../../app/store';
+import { setUser } from '../../features/userSlice';
+import { TypeOf } from 'zod';
+import { useCookies } from 'react-cookie';
 
 type LoginUser = {
-  email: string;
+  mail: string;
   password: string;
 };
 
 const LoginPage: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [cookies, setCookie, removeCookie] = useCookies(['name']);
+
+  const dispatch = useAppDispatch();
   const methods = useForm<LoginInput>({
     resolver: zodResolver(loginSchema)
   });
@@ -43,19 +50,6 @@ const LoginPage: FC = () => {
       toast.success('You successfully logged in');
       navigate(from);
     }
-    if (isError) {
-      if (Array.isArray((error as any).data.error)) {
-        (error as any).data.error.forEach((el: any) =>
-          toast.error(el.message, {
-            position: 'top-right'
-          })
-        );
-      } else {
-        toast.error((error as any).data.message, {
-          position: 'top-right'
-        });
-      }
-    }
   }, [isLoading]);
 
   useEffect(() => {
@@ -68,7 +62,12 @@ const LoginPage: FC = () => {
     loginUser(data);
   };
 
-  console.log(data, 'data');
+  if (isSuccess) {
+    toast.success('You successfully logged in');
+    dispatch(setUser({ user: data?.object.client, token: data?.object.token }));
+    setCookie('name', data && data.object.token, { path: '/' });
+    navigate(from);
+  }
 
   return (
     <div className={styles.sign_in}>
@@ -86,12 +85,12 @@ const LoginPage: FC = () => {
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form_inner}>
             <InputField
               control={control}
-              name='email'
+              name='mail'
               icon={<EmailSvg />}
               size='large'
-              placeholder='Email'
+              placeholder='mail'
               type='email'
-              errors={errors.email?.message}
+              errors={errors.mail?.message}
             />
 
             <InputField
@@ -105,7 +104,7 @@ const LoginPage: FC = () => {
             />
 
             <Button className={styles.btn} size='large' htmlType='submit' loading={isLoading}>
-              Sign up
+              Sign in
             </Button>
           </form>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Logo, Profile, Search } from '@shared/ui';
+import { Logo, Profile, SearchF } from '@shared/ui';
 
 import styles from './Header.module.scss';
 
@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <Logo />
-      <Search />
+      <SearchF />
       <Profile />
     </header>
   );

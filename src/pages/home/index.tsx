@@ -1,12 +1,27 @@
-import { Header, TableField } from '@widgets';
+import { StarOutlined } from '@ant-design/icons';
+import { LinkItem } from '@shared/ui';
+import { Header, Sidebar, TableField } from '@widgets';
 import { Layout } from 'antd';
-import React from 'react';
+
+const { Content } = Layout;
 
 const HomePage = () => {
   return (
     <>
-      <Header />
-      <TableField />
+      <div>
+        <Layout>
+          <Header />
+
+          <Layout>
+            <Sidebar>
+              <LinkItem text='Starred' icon={<StarOutlined />} path='/starred' />
+            </Sidebar>
+            <Content>
+              <TableField />
+            </Content>
+          </Layout>
+        </Layout>
+      </div>
     </>
   );
 };

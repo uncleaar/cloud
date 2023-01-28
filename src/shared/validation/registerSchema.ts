@@ -4,7 +4,7 @@ export const registerSchema = object({
   name: string().min(1, 'First name is required').max(100),
   surname: string().min(1, 'Last name is required').max(100),
   patronymic: string().min(1, 'Middle name is required').max(100),
-  email: string().min(1, 'Email address is required').email('Email Address is invalid'),
+  mail: string().min(1, 'Mail address is required').email('Mail Address is invalid'),
   password: string()
     .min(1, 'Password is required')
     .min(8, 'Password must be more than 8 characters')

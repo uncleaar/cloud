@@ -20,14 +20,23 @@
       "@shared": [
         "./shared"
       ],
-      "@shared/*": [
-        "./shared/*"
+      "@shared/constants": [
+        "./shared/constants"
+      ],
+      "@shared/ui": [
+        "./shared/ui"
+      ],
+      "@shared/api": [
+        "./shared/api"
       ],
        "@shared/validation": [
         "./shared/validation"
       ],
       "@widgets": [
         "./widgets"
+      ],
+      "@pages": [
+        "./pages"
       ],
     }
   },
