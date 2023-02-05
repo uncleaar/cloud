@@ -13,8 +13,10 @@ export default defineConfig({
       '@shared/validation': path.resolve(__dirname, './src/shared/validation'),
       '@shared/constants': path.resolve(__dirname, './src/shared/constants'),
       '@shared/api': path.resolve(__dirname, './src/shared/api'),
+      '@shared/services': path.resolve(__dirname, './src/shared/services'),
       '@shared/ui': path.resolve(__dirname, './src/shared/ui'),
       '@widgets': path.resolve(__dirname, './src/widgets'),
+      '@context': path.resolve(__dirname, './src/context'),
       '@pages': path.resolve(__dirname, './src/pages')
     }
   }

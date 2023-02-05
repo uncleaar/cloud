@@ -1,23 +1,33 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Navigate, RouterProvider } from 'react-router';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Spin } from 'antd';
 import { CookiesProvider } from 'react-cookie';
-import { Provider, useSelector } from 'react-redux';
-import { persistor, store } from './store';
 import { AppRoutes } from './routes/routes';
-import { PersistGate } from 'redux-persist/integration/react';
+import { StateContextProvider } from '@context';
+import 'react-toastify/dist/ReactToastify.css';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry: 1,
+      staleTime: 5 * 1000
+    }
+  }
+});
 
 export const App = () => {
   return (
-    <Provider store={store}>
-      <React.Suspense fallback={<Spin size='large' />}>
-        <CookiesProvider>
-          <PersistGate persistor={persistor}>
-            <AppRoutes />
-          </PersistGate>
-        </CookiesProvider>
-      </React.Suspense>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <StateContextProvider>
+        <React.Suspense fallback={<Spin size='large' />}>
+          <AppRoutes />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </React.Suspense>
+      </StateContextProvider>
+    </QueryClientProvider>
   );
 };

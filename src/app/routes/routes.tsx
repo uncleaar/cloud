@@ -6,7 +6,7 @@ const RegisterPage = React.lazy(() => import('../../pages/sign-up'));
 import { ROUTES } from '@shared/constants';
 import { Layout } from '@widgets';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 
 export const AuthApp = () => (
   <Routes>
@@ -25,6 +25,7 @@ export const AppRoutes = () => {
         <Route path='sign-in' element={<LoginPage />} />
         <Route path='sign-up' element={<RegisterPage />} />
       </Routes>
+      <ToastContainer />
     </Layout>
   );
 };

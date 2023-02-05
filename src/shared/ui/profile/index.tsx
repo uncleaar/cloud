@@ -1,23 +1,20 @@
 import { useAppSelector, useAppDispatch } from '../../../app/store';
 import React from 'react';
-import { logout } from '../../../features/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { Avatar, Button } from 'antd';
 
 export const Profile = () => {
-  const { user } = useAppSelector((state) => state.userState);
   const navigate = useNavigate();
 
-  const dispatch = useAppDispatch();
-
-  const signout = () => {
-    localStorage.removeItem('token');
+  const logout = () => {
     navigate('/sign-in');
-    dispatch(logout());
   };
   return (
     <div>
-      {user && user.name}
-      <button onClick={signout}>logout</button>
+      <div>
+        <Avatar />
+      </div>
+      <Button onClick={logout}>Logout</Button>
     </div>
   );
 };

@@ -26,6 +26,10 @@
       "@shared/ui": [
         "./shared/ui"
       ],
+
+       "@shared/services": [
+        "./shared/services"
+      ],
       "@shared/api": [
         "./shared/api"
       ],
@@ -34,6 +38,9 @@
       ],
       "@widgets": [
         "./widgets"
+      ],
+      "@context": [
+        "./context"
       ],
       "@pages": [
         "./pages"
