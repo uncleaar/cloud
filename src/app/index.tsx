@@ -6,6 +6,7 @@ import { CookiesProvider } from 'react-cookie';
 import { AppRoutes } from './routes/routes';
 import { StateContextProvider } from '@context';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthMiddleware } from '@middleware';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,12 +23,14 @@ const queryClient = new QueryClient({
 export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <StateContextProvider>
-        <React.Suspense fallback={<Spin size='large' />}>
-          <AppRoutes />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </React.Suspense>
-      </StateContextProvider>
+      <React.Suspense fallback={<Spin size='large' />}>
+        <StateContextProvider>
+          <AuthMiddleware>
+            <AppRoutes />
+          </AuthMiddleware>
+        </StateContextProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </React.Suspense>
     </QueryClientProvider>
   );
 };

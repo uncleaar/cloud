@@ -18,6 +18,7 @@ export default defineConfig({
       '@widgets': path.resolve(__dirname, './src/widgets'),
       '@context': path.resolve(__dirname, './src/context'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
+      '@middleware': path.resolve(__dirname, './src/middleware'),
       '@pages': path.resolve(__dirname, './src/pages')
     }
   }

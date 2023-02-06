@@ -42,6 +42,9 @@
        "@hooks": [
         "./hooks"
       ],
+       "@middleware": [
+        "./middleware"
+      ],
       "@context": [
         "./context"
       ],
