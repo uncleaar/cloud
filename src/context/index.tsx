@@ -1,13 +1,13 @@
 import React from 'react';
-import { RootObject } from '@shared/api';
+import { Client } from '@shared/api';
 
 type State = {
-  authUser: RootObject | null;
+  authUser: Client | null;
 };
 
 type Action = {
   type: string;
-  payload: RootObject | null;
+  payload: Client | null;
 };
 
 type Dispatch = (action: Action) => void;
@@ -39,6 +39,8 @@ const stateReducer = (state: State, action: Action) => {
 const StateContextProvider = ({ children }: StateContextProviderProps) => {
   const [state, dispatch] = React.useReducer(stateReducer, initialState);
   const value = { state, dispatch };
+
+  console.log(value, '<value></value>');
   return <StateContext.Provider value={value}>{children}</StateContext.Provider>;
 };
 

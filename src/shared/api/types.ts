@@ -20,7 +20,14 @@ export interface ObjectResponse {
   token: string;
 }
 
-export interface RootObject {
+export interface RootObjectMe {
   status: StatusCode;
-  object: Object;
+  object: Client;
+}
+
+export interface RootObjectSignIn {
+  status: StatusCode;
+  object: {
+    client: Client;
+  };
 }

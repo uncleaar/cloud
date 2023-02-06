@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 import { useStateContext } from '@context';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { getMeFn, loginUserFn } from '@shared/api';
+import { useLoginMutation } from '@hooks';
 
 type LoginUser = {
   mail: string;
@@ -32,8 +33,6 @@ const LoginPage: FC = () => {
   });
 
   const {
-    register,
-    reset,
     handleSubmit,
     control,
     formState: { isSubmitSuccessful, errors }
@@ -42,26 +41,17 @@ const LoginPage: FC = () => {
 
   const stateContext = useStateContext();
 
-  const query = useQuery(['authUser'], getMeFn, {
-    enabled: false,
-    retry: 1,
-    select: (data) => data.object,
-    onSuccess: (data) => {
-      stateContext.dispatch({ type: 'SET_USER', payload: data });
-    }
-  });
-  console.log(stateContext, 'stateContext');
-
-  const { mutate: loginUser } = useMutation((userData: LoginInput) => loginUserFn(userData), {
-    onSuccess: () => {
-      query.refetch();
-      toast.success('You successfully logged in');
-      navigate(from);
+  const signIn = useLoginMutation({
+    options: {
+      onSuccess: (data) => {
+        stateContext.dispatch({ type: 'SET_USER', payload: data.object.client });
+        navigate(from);
+      }
     }
   });
 
   const onSubmit: SubmitHandler<LoginUser> = (values) => {
-    loginUser(values);
+    signIn.mutate(values);
   };
 
   return (

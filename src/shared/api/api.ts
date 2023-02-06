@@ -1,4 +1,4 @@
-import { RootObject } from './types';
+import { RootObjectMe, RootObjectSignIn } from './types';
 import { LoginInput } from '@shared/validation';
 import axios from 'axios';
 
@@ -12,11 +12,11 @@ export const api = axios.create({
 api.defaults.headers.common['Content-Type'] = 'application/json';
 
 export const loginUserFn = async (user: LoginInput) => {
-  const response = await api.post<RootObject>('authorizations/sign-in', user);
+  const response = await api.post<RootObjectSignIn>('authorizations/sign-in', user);
   return response.data;
 };
 
 export const getMeFn = async () => {
-  const response = await api.get<RootObject>('me/1');
+  const response = await api.get<RootObjectMe>('me/1');
   return response.data;
 };

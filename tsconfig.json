@@ -39,6 +39,9 @@
       "@widgets": [
         "./widgets"
       ],
+       "@hooks": [
+        "./hooks"
+      ],
       "@context": [
         "./context"
       ],
