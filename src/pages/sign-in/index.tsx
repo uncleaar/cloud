@@ -1,9 +1,8 @@
-import React, { FC, useEffect } from 'react';
-import { Input, Image, Typography, Button, Divider, Form } from 'antd';
+import { FC } from 'react';
+import { Image, Typography, Button, Divider, Form } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form';
-import { Controller } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -12,13 +11,11 @@ import { LoginInput, loginSchema } from '@shared/validation';
 import LoginImg from '../../app/assets/images/login.png';
 
 import styles from './SignIn.module.scss';
-import { TypeOf } from 'zod';
-import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
 import { useStateContext } from '@context';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { getMeFn, loginUserFn } from '@shared/api';
-import { useLoginMutation } from '@hooks';
+import { useLocalStorage, useLoginMutation } from '@hooks';
+import { useQuery } from '@tanstack/react-query';
+import { getClientByMail } from '@shared/api';
 
 type LoginUser = {
   mail: string;
@@ -28,6 +25,8 @@ type LoginUser = {
 const LoginPage: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [name, setName] = useLocalStorage<{}>('client');
+
   const methods = useForm<LoginInput>({
     resolver: zodResolver(loginSchema)
   });
@@ -45,6 +44,7 @@ const LoginPage: FC = () => {
     options: {
       onSuccess: (data) => {
         stateContext.dispatch({ type: 'SET_USER', payload: data.object.client });
+        setName(data.object.client);
         navigate(from);
       }
     }

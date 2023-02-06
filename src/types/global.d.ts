@@ -9,3 +9,13 @@ interface RequestMutationSettings<Func = {}> {
     any
   >;
 }
+
+interface RequestQuerySettings<Func = {}> {
+  config?: import('axios').AxiosRequestConfig;
+  options?: import('@tanstack/react-query').UseQueryOptions<
+    Awaited<ReturnType<Func>>,
+    any,
+    Awaited<ReturnType<Func>>,
+    any
+  >;
+}

@@ -29,5 +29,6 @@ export interface RootObjectSignIn {
   status: StatusCode;
   object: {
     client: Client;
+    token: string;
   };
 }

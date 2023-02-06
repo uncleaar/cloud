@@ -8,9 +8,9 @@ type AuthMiddlewareProps = {
 };
 
 export const AuthMiddleware: React.FC<AuthMiddlewareProps> = ({ children }) => {
-  const [cookies] = useCookies(['logged_in']);
+  const [cookies] = useCookies(['AUTH_TOKEN']);
 
-  if (cookies.logged_in) {
+  if (cookies.AUTH_TOKEN) {
     return <ScreenLoader />;
   }
 
