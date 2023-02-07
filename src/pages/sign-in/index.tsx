@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Image, Typography, Button, Divider, Form } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -12,7 +12,7 @@ import LoginImg from '../../app/assets/images/login.png';
 
 import styles from './SignIn.module.scss';
 import { Link } from 'react-router-dom';
-import { useStateContext } from '@context';
+import { useStateContext } from '@context/store';
 import { useLocalStorage, useLoginMutation } from '@hooks';
 import { useQuery } from '@tanstack/react-query';
 import { getClientByMail } from '@shared/api';

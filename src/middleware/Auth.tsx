@@ -2,15 +2,16 @@ import { useCookies } from 'react-cookie';
 
 import React from 'react';
 import { ScreenLoader } from '@widgets';
+import { useLocalStorage } from '@hooks';
 
 type AuthMiddlewareProps = {
   children: React.ReactElement;
 };
 
 export const AuthMiddleware: React.FC<AuthMiddlewareProps> = ({ children }) => {
-  const [cookies] = useCookies(['AUTH_TOKEN']);
+  const [name] = useLocalStorage<{}>('client');
 
-  if (cookies.AUTH_TOKEN) {
+  if (!name) {
     return <ScreenLoader />;
   }
 

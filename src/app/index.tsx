@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Spin } from 'antd';
 import { CookiesProvider } from 'react-cookie';
 import { AppRoutes } from './routes/routes';
-import { StateContextProvider } from '@context';
+import { StateContextProvider } from '@context/store';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthMiddleware } from '@middleware';
 

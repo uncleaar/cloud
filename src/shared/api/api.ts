@@ -26,3 +26,8 @@ export const getClientByMail = async ({ params, config }: RequestClientByMail) =
   const response = await api.get<RootObjectMe>(`me?mail=${params.mail}`);
   return response.data;
 };
+
+export const logout = async () => {
+  const response = await api.post('authorizations/logout');
+  return response.data;
+};
