@@ -1,7 +1,7 @@
-import { useAppSelector, useAppDispatch } from '../../../app/store';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, Button } from 'antd';
+import { ThemeButton } from '@shared/ui';
 
 export const Profile = () => {
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ export const Profile = () => {
     <div>
       <div>
         <Avatar />
+        <ThemeButton />
       </div>
       <Button onClick={logout}>Logout</Button>
     </div>
