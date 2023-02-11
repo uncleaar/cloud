@@ -5,8 +5,6 @@ import { EmailSvg, LogoSvg, PasswordSvg } from '@shared/ui';
 
 import RegisterImg from '../../app/assets/images/register.png';
 
-import { useRegisterUserMutation } from '@shared/api/auth';
-
 import styles from './SignUp.module.scss';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form';
@@ -27,10 +25,8 @@ const RegisterPage: FC = () => {
     resolver: zodResolver(registerSchema)
   });
 
-  const [registerUser, { isLoading, isError, error, isSuccess }] = useRegisterUserMutation();
-
   const { register, handleSubmit, control } = methods;
-  const onSubmit: SubmitHandler<RegisterUser> = (data) => registerUser(data);
+  const onSubmit: SubmitHandler<RegisterUser> = (data) => console.log(data);
 
   return (
     <div className={styles.sign_up}>

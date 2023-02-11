@@ -1,40 +1,39 @@
-import { Client } from '@shared/api';
-import { useReducer } from 'react';
-import { StateContext } from './StoreContext';
+import { useAuthState } from '@hooks';
+import React from 'react';
 
-type StateContextProviderProps = { children: React.ReactNode };
+import type { StoreContextProps } from './StoreContext';
+import { StoreContext } from './StoreContext';
 
-type State = {
-  authUser: Client | null;
-};
+interface StoreProviderProps {
+  children: React.ReactNode;
+}
 
-type Action = {
-  type: string;
-  payload: Client | null;
-};
-
-const initialState: State = {
-  authUser: null
-};
-
-const stateReducer = (state: State, action: Action) => {
-  switch (action.type) {
-    case 'SET_USER': {
-      return {
-        ...state,
-        authUser: action.payload
-      };
+export const StoreProvider: React.FC<StoreProviderProps> = ({ children }) => {
+  const authState = useAuthState();
+  const [store, setStore] = React.useState<StoreContextProps['store']>({
+    session: {
+      isLoginIn: false
     }
-    default: {
-      throw new Error(`Unhandled action type`);
+  });
+
+  React.useEffect(() => {
+    if (authState.data) {
+      setStore({
+        ...store,
+        session: {
+          isLoginIn: true
+        }
+      });
     }
-  }
-};
+  }, [authState.data]);
 
-export const StateContextProvider = ({ children }: StateContextProviderProps) => {
-  const [state, dispatch] = useReducer(stateReducer, initialState);
-  const value = { state, dispatch };
+  const value = React.useMemo(
+    () => ({
+      store,
+      setStore
+    }),
+    [store]
+  );
 
-  console.log(value, '<value></value>');
-  return <StateContext.Provider value={value}>{children}</StateContext.Provider>;
+  return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
 };

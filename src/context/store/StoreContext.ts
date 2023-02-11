@@ -1,29 +1,23 @@
 import React from 'react';
-import { Client } from '@shared/api';
 
-type State = {
-  authUser: Client | null;
+export type Store = {
+  session: {
+    isLoginIn: boolean;
+  };
 };
 
-type Action = {
-  type: string;
-  payload: Client | null;
-};
+export interface StoreContextProps {
+  store: Store;
+  setStore: React.Dispatch<React.SetStateAction<Store>>;
+}
 
-type Dispatch = (action: Action) => void;
-
-export const StateContext = React.createContext<{ state: State; dispatch: Dispatch } | undefined>(
-  undefined
-);
-
-const useStateContext = () => {
-  const context = React.useContext(StateContext);
-
-  if (context) {
-    return context;
+export const INITIAL_STORE: Store = {
+  session: {
+    isLoginIn: false
   }
-
-  throw new Error(`useStateContext must be used within a StateContextProvider`);
 };
 
-export { useStateContext };
+export const StoreContext = React.createContext<StoreContextProps>({
+  store: INITIAL_STORE,
+  setStore: () => {}
+});
