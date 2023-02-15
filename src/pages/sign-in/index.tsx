@@ -2,7 +2,6 @@ import { FC, useContext } from 'react';
 import { Image, Typography, Button, Divider, Form } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -12,10 +11,9 @@ import LoginImg from '../../app/assets/images/login.png';
 
 import styles from './SignIn.module.scss';
 import { Link } from 'react-router-dom';
-import { useLocalStorage, useLoginMutation } from '@hooks';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { getClientByMail, loginUserFn } from '@shared/api';
-import { AuthContext, useStateContext } from '@context/store';
+import { useLoginMutation } from '@hooks';
+
+import { useStateContext } from '@context/store';
 
 type LoginUser = {
   mail: string;
@@ -80,7 +78,8 @@ const LoginPage: FC = () => {
               size='large'
               placeholder='mail'
               type='email'
-              errors={errors.mail?.message}
+              id={errors.mail?.message ? 'error' : 'success'}
+              help={errors.mail?.message}
             />
 
             <InputField
@@ -90,7 +89,8 @@ const LoginPage: FC = () => {
               size='large'
               placeholder='Password'
               type='password'
-              errors={errors.password?.message}
+              id={errors.password?.message ? 'error' : 'success'}
+              help={errors.password?.message}
             />
 
             <Button className={styles.btn} size='large' htmlType='submit'>

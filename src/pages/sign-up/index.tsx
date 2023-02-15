@@ -1,17 +1,18 @@
 import React, { FC } from 'react';
 import { Input, Image, Typography, Button, Divider, Form } from 'antd';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { EmailSvg, LogoSvg, PasswordSvg } from '@shared/ui';
+import { EmailSvg, LogoSvg, PasswordSvg, InputField } from '@shared/ui';
 
 import RegisterImg from '../../app/assets/images/register.png';
 
-import styles from './SignUp.module.scss';
 import { useForm } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { RegisterInput, registerSchema } from '@shared/validation';
 import { useNavigate } from 'react-router';
 import { useRegisterMutation } from '@hooks';
 import { toast } from 'react-toastify';
+
+import styles from './SignUp.module.scss';
 
 type RegisterUser = {
   mail: string;
@@ -29,7 +30,12 @@ const RegisterPage: FC = () => {
     resolver: zodResolver(registerSchema)
   });
 
-  const { register, handleSubmit, control, formState, setError } = methods;
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors }
+  } = methods;
   const registerMutation = useRegisterMutation({
     options: {
       onSuccess: () => {
@@ -38,6 +44,8 @@ const RegisterPage: FC = () => {
       }
     }
   });
+
+  console.log(errors, 'errors');
   return (
     <div className={styles.sign_up}>
       <div className={styles.left}>
@@ -61,51 +69,65 @@ const RegisterPage: FC = () => {
             )}
             className={styles.form_inner}
           >
-            <Controller
+            <InputField
               control={control}
               name='name'
-              render={({ field }) => (
-                <Input {...field} size='large' placeholder='First Name' type='text' />
-              )}
+              size='large'
+              placeholder='Name'
+              type='text'
+              id={errors.name?.message ? 'error' : 'success'}
+              help={errors.name?.message}
             />
 
-            <Controller
+            <InputField
               control={control}
               name='surname'
-              render={({ field }) => (
-                <Input {...field} size='large' placeholder='Last Name' type='text' />
-              )}
+              size='large'
+              placeholder='Surname'
+              type='text'
+              id={errors.surname?.message ? 'error' : 'success'}
+              help={errors.surname?.message}
             />
 
-            <Controller
+            <InputField
               control={control}
               name='patronymic'
-              render={({ field }) => (
-                <Input {...field} size='large' placeholder='Middle Name' type='text' />
-              )}
+              size='large'
+              placeholder='Patronymic'
+              type='text'
+              id={errors.patronymic?.message ? 'error' : 'success'}
+              help={errors.patronymic?.message}
             />
-            <Controller
+
+            <InputField
               control={control}
               name='mail'
-              render={({ field }) => (
-                <Input {...field} size='large' placeholder='mail' type='email' />
-              )}
+              icon={<EmailSvg />}
+              size='large'
+              placeholder='Email'
+              type='email'
+              id={errors.mail?.message ? 'error' : 'success'}
+              help={errors.mail?.message}
             />
 
-            <Controller
+            <InputField
               control={control}
               name='password'
-              render={({ field }) => (
-                <Input {...field} size='large' placeholder='Password' type='password' />
-              )}
+              size='large'
+              placeholder='Password'
+              type='password'
+              id={errors.password?.message ? 'error' : 'success'}
+              help={errors.password?.message}
             />
 
-            <Controller
+            <InputField
               control={control}
               name='passwordConfirm'
-              render={({ field }) => (
-                <Input {...field} size='large' placeholder='Confirm Password' type='password' />
-              )}
+              size='large'
+              placeholder='Password confirm'
+              type='password'
+              id={errors.passwordConfirm?.message ? 'error' : 'success'}
+              help={errors.passwordConfirm?.message}
             />
 
             <Button className={styles.btn} size='large' htmlType='submit'>

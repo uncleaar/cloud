@@ -1,13 +1,15 @@
 import React from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Spin } from 'antd';
+import { ConfigProvider, Spin } from 'antd';
 import { CookiesProvider } from 'react-cookie';
 import { AppRoutes } from './routes/routes';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthMiddleware } from '@middleware';
 import { ThemeProvider } from '@context/theme';
 import { AuthContextProvider } from '@context/store';
+
+import './styles/globals.css';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +34,7 @@ export const App = () => {
             {/* </AuthMiddleware> */}
           </AuthContextProvider>
         </ThemeProvider>
+
         <ReactQueryDevtools initialIsOpen={false} />
       </React.Suspense>
     </QueryClientProvider>

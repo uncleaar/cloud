@@ -1,4 +1,4 @@
-import { Input } from 'antd';
+import { Form, Input } from 'antd';
 import React, { FC } from 'react';
 import { Controller } from 'react-hook-form';
 
@@ -10,6 +10,8 @@ interface InputProps {
   type: string;
   icon?: any;
   errors?: string;
+  id?: 'error' | 'success' | 'warning';
+  help?: string;
 }
 
 export const InputField: FC<InputProps> = ({
@@ -19,10 +21,12 @@ export const InputField: FC<InputProps> = ({
   placeholder,
   type,
   icon,
+  id,
+  help,
   errors
 }) => {
   return (
-    <>
+    <Form.Item validateStatus={id} help={help}>
       <Controller
         control={control}
         name={name}
@@ -31,6 +35,6 @@ export const InputField: FC<InputProps> = ({
         )}
       />
       {errors && <div>{errors}</div>}
-    </>
+    </Form.Item>
   );
 };
