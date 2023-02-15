@@ -89,8 +89,6 @@ const RegisterPage: FC = () => {
               help={errors.surname?.message}
             />
 
-            {/* <InputNumberCode /> */}
-
             <InputField
               control={control}
               name='patronymic'
