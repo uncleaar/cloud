@@ -7,9 +7,11 @@ import RegisterImg from '../../app/assets/images/register.png';
 
 import styles from './SignUp.module.scss';
 import { useForm } from 'react-hook-form';
-import { SubmitHandler } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
 import { RegisterInput, registerSchema } from '@shared/validation';
+import { useNavigate } from 'react-router';
+import { useRegisterMutation } from '@hooks';
+import { toast } from 'react-toastify';
 
 type RegisterUser = {
   mail: string;
@@ -21,13 +23,21 @@ type RegisterUser = {
 };
 
 const RegisterPage: FC = () => {
+  const navigate = useNavigate();
+
   const methods = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema)
   });
 
-  const { register, handleSubmit, control } = methods;
-  const onSubmit: SubmitHandler<RegisterUser> = (data) => console.log(data);
-
+  const { register, handleSubmit, control, formState, setError } = methods;
+  const registerMutation = useRegisterMutation({
+    options: {
+      onSuccess: () => {
+        toast.success('You successfully logged in');
+        navigate('/');
+      }
+    }
+  });
   return (
     <div className={styles.sign_up}>
       <div className={styles.left}>
@@ -37,7 +47,20 @@ const RegisterPage: FC = () => {
             <Typography.Title level={4}>Sign up into your account</Typography.Title>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className={styles.form_inner}>
+          <form
+            onSubmit={handleSubmit(
+              ({ name, surname, mail, password, passwordConfirm, patronymic }) =>
+                registerMutation.mutate({
+                  name,
+                  surname,
+                  mail,
+                  password,
+                  passwordConfirm,
+                  patronymic
+                })
+            )}
+            className={styles.form_inner}
+          >
             <Controller
               control={control}
               name='name'

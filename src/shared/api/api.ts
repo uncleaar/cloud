@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { RootObjectMe, RootObjectSignIn } from './types';
-import { LoginInput } from '@shared/validation';
+import { LoginInput, RegisterInput } from '@shared/validation';
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:8090/api/v1/';
@@ -19,6 +19,11 @@ api.defaults.headers.common['Content-Type'] = 'application/json';
 
 export const loginUserFn = async (user: LoginInput) => {
   const response = await api.post<RootObjectSignIn>('authorizations/sign-in', user);
+  return response.data;
+};
+
+export const signUpUserFn = async (user: RegisterInput) => {
+  const response = await api.post<RootObjectSignIn>('authorizations/sign-up', user);
   return response.data;
 };
 

@@ -7,7 +7,7 @@ import { AppRoutes } from './routes/routes';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthMiddleware } from '@middleware';
 import { ThemeProvider } from '@context/theme';
-import { StoreProvider } from '@context/store';
+import { AuthContextProvider } from '@context/store';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,11 +26,11 @@ export const App = () => {
     <QueryClientProvider client={queryClient}>
       <React.Suspense fallback={<Spin size='large' />}>
         <ThemeProvider>
-          <StoreProvider>
-            <AuthMiddleware>
-              <AppRoutes />
-            </AuthMiddleware>
-          </StoreProvider>
+          <AuthContextProvider>
+            {/* <AuthMiddleware> */}
+            <AppRoutes />
+            {/* </AuthMiddleware> */}
+          </AuthContextProvider>
         </ThemeProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </React.Suspense>

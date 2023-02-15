@@ -1,2 +1,2 @@
-export * from './StoreContext';
-export * from './StoreProvider';
+export * from './AuthContext';
+export * from './AuthProvider';

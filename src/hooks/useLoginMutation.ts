@@ -8,7 +8,7 @@ interface UseLoginMutationParams {
 
 export const useLoginMutation = (settings?: RequestMutationSettings<typeof loginUserFn>) =>
   useMutation(
-    ['logInWithEmailAndPassword'],
+    ['useLoginMutation'],
     (params: RequestParams<UseLoginMutationParams>) => loginUserFn(params),
     settings?.options && settings.options
   );

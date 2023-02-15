@@ -19,6 +19,7 @@ export const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const storage = getStorage(app);
+export const GoogleProvider = new GoogleAuthProvider();
 
 export type Collection = 'users';
-export const database = getFirestore(app);
+export const db = getFirestore(app);

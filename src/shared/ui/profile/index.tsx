@@ -9,8 +9,6 @@ export const Profile = () => {
 
   const logoutMutation = useLogoutMutation();
 
-  console.log(logoutMutation, 'logoutMutation');
-
   const logout = () => {
     navigate('/sign-in');
     logoutMutation.mutate();

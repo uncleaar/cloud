@@ -12,10 +12,10 @@ import LoginImg from '../../app/assets/images/login.png';
 
 import styles from './SignIn.module.scss';
 import { Link } from 'react-router-dom';
-import { useStateContext } from '@context/store';
 import { useLocalStorage, useLoginMutation } from '@hooks';
-import { useQuery } from '@tanstack/react-query';
-import { getClientByMail } from '@shared/api';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { getClientByMail, loginUserFn } from '@shared/api';
+import { AuthContext, useStateContext } from '@context/store';
 
 type LoginUser = {
   mail: string;
@@ -23,14 +23,16 @@ type LoginUser = {
 };
 
 const LoginPage: FC = () => {
-  const navigate = useNavigate();
   const location = useLocation();
-  const [name, setName] = useLocalStorage<{}>('client');
+  const navigate = useNavigate();
+
+  const stateContext = useStateContext();
 
   const methods = useForm<LoginInput>({
     resolver: zodResolver(loginSchema)
   });
 
+  console.log(stateContext, 'stateContext');
   const {
     handleSubmit,
     control,
@@ -38,21 +40,15 @@ const LoginPage: FC = () => {
   } = methods;
   const from = ((location.state as any)?.from.pathname as string) || '/';
 
-  const stateContext = useStateContext();
-
-  const signIn = useLoginMutation({
+  const logInWithEmailAndPassword = useLoginMutation({
     options: {
       onSuccess: (data) => {
+        toast.success('You successfully logged in');
         stateContext.dispatch({ type: 'SET_USER', payload: data.object.client });
-        setName(data.object.client);
-        navigate(from);
+        navigate('/');
       }
     }
   });
-
-  const onSubmit: SubmitHandler<LoginUser> = (values) => {
-    signIn.mutate(values);
-  };
 
   return (
     <div className={styles.sign_in}>
@@ -68,7 +64,15 @@ const LoginPage: FC = () => {
             <Typography.Title level={4}>Sign in into your account</Typography.Title>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className={styles.form_inner}>
+          <form
+            onSubmit={handleSubmit(async ({ password, mail }) =>
+              logInWithEmailAndPassword.mutate({
+                mail,
+                password
+              })
+            )}
+            className={styles.form_inner}
+          >
             <InputField
               control={control}
               name='mail'
@@ -101,6 +105,10 @@ const LoginPage: FC = () => {
               Sign up
             </Button>
           </Link>
+
+          <Button className={styles.btn_sign} size='large' onClick={() => console.log({})}>
+            Sign up with google
+          </Button>
         </div>
       </div>
     </div>
