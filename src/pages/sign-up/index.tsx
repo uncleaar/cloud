@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Input, Image, Typography, Button, Divider, Form } from 'antd';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { EmailSvg, LogoSvg, PasswordSvg, InputField } from '@shared/ui';
+import { EmailSvg, LogoSvg, PasswordSvg, InputField, InputNumberCode } from '@shared/ui';
 
 import RegisterImg from '../../app/assets/images/register.png';
 
@@ -88,6 +88,8 @@ const RegisterPage: FC = () => {
               id={errors.surname?.message ? 'error' : 'success'}
               help={errors.surname?.message}
             />
+
+            {/* <InputNumberCode /> */}
 
             <InputField
               control={control}
