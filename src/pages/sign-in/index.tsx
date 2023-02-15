@@ -41,9 +41,13 @@ const LoginPage: FC = () => {
   const logInWithEmailAndPassword = useLoginMutation({
     options: {
       onSuccess: (data) => {
-        toast.success('You successfully logged in');
-        stateContext.dispatch({ type: 'SET_USER', payload: data.object.client });
-        navigate('/');
+        if (data.status.code === 'BANNED') {
+          toast.error(data.status.description);
+        } else {
+          toast.success(data.status.code);
+          stateContext.dispatch({ type: 'SET_USER', payload: data.object.client });
+          navigate('/');
+        }
       }
     }
   });
