@@ -23,6 +23,12 @@ export const stateReducer = (state: State, action: Action) => {
         authUser: action.payload
       };
     }
+    case 'LOGOUT': {
+      return {
+        ...state,
+        authUser: null
+      };
+    }
     default: {
       throw new Error(`Unhandled action type`);
     }

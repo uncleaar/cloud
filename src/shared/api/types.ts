@@ -20,7 +20,7 @@ export interface ObjectResponse {
   token: string;
 }
 
-export interface RootObjectMe {
+export interface RootObjectSignUp {
   status: StatusCode;
   object: Client;
 }
@@ -32,3 +32,8 @@ export interface RootObjectSignIn {
     token: string;
   };
 }
+
+export type ConfirmAccount = {
+  clientId: string;
+  token: string;
+};

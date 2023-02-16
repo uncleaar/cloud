@@ -24,7 +24,7 @@ const LoginPage: FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const stateContext = useStateContext();
+  const { dispatch } = useStateContext();
 
   const methods = useForm<LoginInput>({
     resolver: zodResolver(loginSchema)
@@ -42,8 +42,7 @@ const LoginPage: FC = () => {
       onSuccess: (data) => {
         toast.success(data.status.code);
 
-        console.log(data, 'data');
-        stateContext.dispatch({ type: 'SET_USER', payload: data.object.client });
+        dispatch({ type: 'SET_USER', payload: data.object.client });
         navigate('/');
       },
 

@@ -9,6 +9,13 @@
   background: #b4b4b4;
   gap: 50px;
 }
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+}
 
 .code {
   span {
@@ -29,6 +36,7 @@
   align-items: center;
   justify-content: center;
   padding: 20px 0;
+  margin: 20px auto;
   background: #1e2772;
   box-shadow: 0px 12.1167px 24.2334px rgba(1, 11, 253, 0.12);
   border-radius: 8.07781px;

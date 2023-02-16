@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { RootObjectMe, RootObjectSignIn } from './types';
+import { ConfirmAccount, RootObjectSignIn, RootObjectSignUp } from './types';
 import { LoginInput, RegisterInput } from '@shared/validation';
 import axios from 'axios';
 
@@ -24,19 +24,24 @@ export const loginUserFn = async (user: LoginInput) => {
 };
 
 export const signUpUserFn = async (user: RegisterInput) => {
-  const response = await api.post<RootObjectSignIn>('authorizations/sign-up', user);
+  const response = await api.post<RootObjectSignUp>('authorizations/sign-up', user);
 
   if (response) {
   }
   return response.data;
 };
 
-export const getClientByMail = async ({ params, config }: RequestClientByMail) => {
-  const response = await api.get<RootObjectMe>(`me?mail=${params.mail}`);
+// export const getClientByMail = async ({ params, config }: RequestClientByMail) => {
+//   const response = await api.get<RootObjectMe>(`me?mail=${params.mail}`);
+//   return response.data;
+// };
+
+export const confirmAccount = async (info: ConfirmAccount) => {
+  const response = await api.post('authorizations/confirm-account/', info);
   return response.data;
 };
 
 export const logout = async () => {
-  const response = await api.post('authorizations/logout');
+  const response = await api.get('authorizations/logout');
   return response.data;
 };

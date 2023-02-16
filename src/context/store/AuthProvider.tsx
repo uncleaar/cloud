@@ -8,7 +8,7 @@ type State = {
   authUser: Client | null;
 };
 
-const initialState: State = {
+export const INITIAL_STORE: State = {
   authUser: null
 };
 
@@ -18,7 +18,7 @@ const getInitialState = () => {
 };
 
 export const AuthContextProvider = ({ children }: StateContextProviderProps) => {
-  const [state, dispatch] = useReducer(stateReducer, initialState, getInitialState);
+  const [state, dispatch] = useReducer(stateReducer, INITIAL_STORE, getInitialState);
 
   const value = { state, dispatch };
 

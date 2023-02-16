@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Input, Image, Typography, Button, Divider, Form } from 'antd';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { EmailSvg, LogoSvg, PasswordSvg, InputField, InputNumberCode, Title } from '@shared/ui';
+import { EmailSvg, LogoSvg, PasswordSvg, InputField, Title } from '@shared/ui';
 
 import RegisterImg from '../../app/assets/images/register.png';
 
@@ -26,7 +26,7 @@ type RegisterUser = {
 
 const RegisterPage: FC = () => {
   const navigate = useNavigate();
-  const stateContext = useStateContext();
+  const { state, dispatch } = useStateContext();
 
   const methods = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema)
@@ -41,14 +41,16 @@ const RegisterPage: FC = () => {
   const registerMutation = useRegisterMutation({
     options: {
       onSuccess: (data) => {
-        if (data.status.code === 'BANNED' || data.status.code === 'VIOLATES_CONSTRAINT') {
-          toast.error(data.status.description);
-        } else {
-          toast.success(data.status.code);
-          stateContext.dispatch({ type: 'SET_USER', payload: data.object.client });
+        toast.success(data.status.code);
 
-          navigate('/verification');
-        }
+        console.log(data, 'data');
+
+        dispatch({ type: 'SET_USER', payload: data.object });
+        navigate('/verification');
+      },
+
+      onError: (data) => {
+        toast.error(data.response.data.status.description);
       }
     }
   });
