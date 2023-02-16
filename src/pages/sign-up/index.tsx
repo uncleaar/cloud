@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Input, Image, Typography, Button, Divider, Form } from 'antd';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { EmailSvg, LogoSvg, PasswordSvg, InputField, InputNumberCode } from '@shared/ui';
+import { EmailSvg, LogoSvg, PasswordSvg, InputField, InputNumberCode, Title } from '@shared/ui';
 
 import RegisterImg from '../../app/assets/images/register.png';
 
@@ -38,9 +38,13 @@ const RegisterPage: FC = () => {
   } = methods;
   const registerMutation = useRegisterMutation({
     options: {
-      onSuccess: () => {
-        toast.success('You successfully logged in');
-        navigate('/');
+      onSuccess: (data) => {
+        if (data.status.code === 'BANNED' || data.status.code === 'VIOLATES_CONSTRAINT') {
+          toast.error(data.status.description);
+        } else {
+          toast.success(data.status.code);
+          navigate('/verification');
+        }
       }
     }
   });
@@ -51,8 +55,7 @@ const RegisterPage: FC = () => {
       <div className={styles.left}>
         <div className={styles.form}>
           <div className={styles.title}>
-            <LogoSvg />
-            <Typography.Title level={4}>Sign up into your account</Typography.Title>
+            <Title>Sign up into your account</Title>
           </div>
 
           <form
