@@ -19,11 +19,15 @@ api.defaults.headers.common['Content-Type'] = 'application/json';
 
 export const loginUserFn = async (user: LoginInput) => {
   const response = await api.post<RootObjectSignIn>('authorizations/sign-in', user);
+
   return response.data;
 };
 
 export const signUpUserFn = async (user: RegisterInput) => {
   const response = await api.post<RootObjectSignIn>('authorizations/sign-up', user);
+
+  if (response) {
+  }
   return response.data;
 };
 

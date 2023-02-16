@@ -13,6 +13,7 @@ import { useRegisterMutation } from '@hooks';
 import { toast } from 'react-toastify';
 
 import styles from './SignUp.module.scss';
+import { useStateContext } from '@context/store';
 
 type RegisterUser = {
   mail: string;
@@ -25,6 +26,7 @@ type RegisterUser = {
 
 const RegisterPage: FC = () => {
   const navigate = useNavigate();
+  const stateContext = useStateContext();
 
   const methods = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema)
@@ -43,13 +45,14 @@ const RegisterPage: FC = () => {
           toast.error(data.status.description);
         } else {
           toast.success(data.status.code);
+          stateContext.dispatch({ type: 'SET_USER', payload: data.object.client });
+
           navigate('/verification');
         }
       }
     }
   });
 
-  console.log(errors, 'errors');
   return (
     <div className={styles.sign_up}>
       <div className={styles.left}>

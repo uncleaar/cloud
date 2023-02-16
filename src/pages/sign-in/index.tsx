@@ -30,7 +30,6 @@ const LoginPage: FC = () => {
     resolver: zodResolver(loginSchema)
   });
 
-  console.log(stateContext, 'stateContext');
   const {
     handleSubmit,
     control,
@@ -41,13 +40,15 @@ const LoginPage: FC = () => {
   const logInWithEmailAndPassword = useLoginMutation({
     options: {
       onSuccess: (data) => {
-        if (data.status.code === 'BANNED') {
-          toast.error(data.status.description);
-        } else {
-          toast.success(data.status.code);
-          stateContext.dispatch({ type: 'SET_USER', payload: data.object.client });
-          navigate('/');
-        }
+        toast.success(data.status.code);
+
+        console.log(data, 'data');
+        stateContext.dispatch({ type: 'SET_USER', payload: data.object.client });
+        navigate('/');
+      },
+
+      onError: (data) => {
+        toast.error(data.response.data.status.description);
       }
     }
   });
