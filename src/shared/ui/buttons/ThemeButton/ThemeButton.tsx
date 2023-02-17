@@ -1,6 +1,8 @@
 import { useTheme } from '@hooks';
 import { Button } from 'antd';
 
+import styles from './ThemeButton.module.scss';
+
 const Sun = () => (
   <svg viewBox='0 0 24 24' width='30' height='30'>
     <path
@@ -22,7 +24,7 @@ export const ThemeButton = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <Button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+    <Button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className={styles.button}>
       {theme === 'dark' ? <Moon /> : <Sun />}
     </Button>
   );

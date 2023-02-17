@@ -1,6 +1,7 @@
 import { useStateContext } from '@context/store';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useConfirmAccountMutation } from '@hooks';
+import { ConfirmAccount } from '@shared/api';
 import { InputField, Title, VerificationCodeInput } from '@shared/ui';
 import { VerificationInp, verificationSchema } from '@shared/validation';
 import { Button } from 'antd';
@@ -17,7 +18,6 @@ const Verification = () => {
   const [seconds, setSeconds] = useState(0);
   const navigate = useNavigate();
   const { state, dispatch } = useStateContext();
-
   const methods = useForm<VerificationInp>({
     resolver: zodResolver(verificationSchema)
   });
@@ -47,7 +47,7 @@ const Verification = () => {
 
       <form
         onSubmit={handleSubmit(async ({ token }) => {
-          const formData = new FormData();
+          const formData: any = new FormData();
 
           formData.append('token', token);
           formData.append('clientId', state.authUser?.entityId);
