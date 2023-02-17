@@ -5,7 +5,7 @@ import { DeleteOutlined, FolderAddOutlined, LoadingOutlined } from '@ant-design/
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import styles from './Table.module.scss';
-import { InputField } from '@shared/ui';
+import { DeleteIcon, InputField } from '@shared/ui';
 import { useQuery } from '@tanstack/react-query';
 import { Folder, getClassifications } from '@shared/api';
 import SpinFC from 'antd/es/spin';
@@ -30,15 +30,10 @@ const columns: ColumnsType<DataType> = [
   },
 
   {
-    title: 'Last Modified',
-    dataIndex: 'last_modified',
-    key: 'last_modified',
-    align: 'right',
-    sorter: (a, b) => a.last_modified.length - b.last_modified.length,
+    align: 'center',
     render: (text, record) => (
       <Space size='middle'>
-        {text}
-        <DeleteOutlined />
+        <DeleteIcon text={text} />
       </Space>
     )
   }
@@ -91,6 +86,9 @@ export const TableField: React.FC = () => {
 
   if (isLoading) return <Spin indicator={antIcon} />;
 
+  if (isLoadingCreateFolder) {
+    setTimeout(() => {}, 5000);
+  }
   return (
     <div className={styles.table}>
       <Modal
@@ -120,7 +118,7 @@ export const TableField: React.FC = () => {
           Add classification
         </Button>
       </div>
-      <Table columns={columns} dataSource={data.list} rowKey='entityId' />
+      <Table columns={columns} dataSource={data.list} rowKey='entityId' size='middle' />
     </div>
   );
 };

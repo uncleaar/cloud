@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from 'axios';
+
 export interface StatusCode {
   code: string;
   description?: any;
@@ -41,3 +43,8 @@ export type ConfirmAccount = {
 export type Folder = {
   name: string;
 };
+
+export interface RequestFolder {
+  params: { id: number };
+  config?: AxiosRequestConfig;
+}

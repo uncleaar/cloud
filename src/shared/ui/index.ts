@@ -7,3 +7,4 @@ export * from './linkitem';
 export * from './buttons/ThemeButton/ThemeButton';
 export * from './input-number-code';
 export * from './title';
+export * from './deleteIcon/deleteIcon';

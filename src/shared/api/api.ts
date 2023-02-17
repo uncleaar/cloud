@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { ConfirmAccount, Folder, RootObjectSignIn, RootObjectSignUp } from './types';
+import { ConfirmAccount, Folder, RequestFolder, RootObjectSignIn, RootObjectSignUp } from './types';
 import { LoginInput, RegisterInput } from '@shared/validation';
 import axios from 'axios';
 
@@ -59,5 +59,10 @@ export const getClassifications = async () => {
 
 export const createFolder = async (data: Folder) => {
   const response = await api_.post('classifications', data);
+  return response.data;
+};
+
+export const deleteFolder = async ({ params, config }: RequestFolder) => {
+  const response = await api_.delete(`classifications/${params.id}`, { ...config });
   return response.data;
 };
