@@ -33,7 +33,7 @@ const columns: ColumnsType<DataType> = [
     align: 'center',
     render: (text, record) => (
       <Space size='middle'>
-        <DeleteIcon text={text} />
+        <DeleteIcon folder={text} />
       </Space>
     )
   }
