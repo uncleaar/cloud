@@ -1,9 +1,11 @@
 import { AxiosRequestConfig } from 'axios';
-import { ConfirmAccount, RootObjectSignIn, RootObjectSignUp } from './types';
+import { ConfirmAccount, Folder, RootObjectSignIn, RootObjectSignUp } from './types';
 import { LoginInput, RegisterInput } from '@shared/validation';
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:8090/api/v1/';
+
+const BASE_URL_ = 'http://localhost:8091/api/v1/';
 
 interface RequestClientByMail {
   params: { mail: string };
@@ -15,7 +17,13 @@ export const api = axios.create({
   withCredentials: true
 });
 
+export const api_ = axios.create({
+  baseURL: BASE_URL_,
+  withCredentials: true
+});
+
 api.defaults.headers.common['Content-Type'] = 'application/json';
+api_.defaults.headers.common['Content-Type'] = 'application/json';
 
 export const loginUserFn = async (user: LoginInput) => {
   const response = await api.post<RootObjectSignIn>('authorizations/sign-in', user);
@@ -26,8 +34,6 @@ export const loginUserFn = async (user: LoginInput) => {
 export const signUpUserFn = async (user: RegisterInput) => {
   const response = await api.post<RootObjectSignUp>('authorizations/sign-up', user);
 
-  if (response) {
-  }
   return response.data;
 };
 
@@ -43,5 +49,15 @@ export const confirmAccount = async (info: ConfirmAccount) => {
 
 export const logout = async () => {
   const response = await api.get('authorizations/logout');
+  return response.data;
+};
+
+export const getClassifications = async () => {
+  const response = await api_.get('classifications');
+  return response.data;
+};
+
+export const createFolder = async (data: Folder) => {
+  const response = await api_.post('classifications', data);
   return response.data;
 };

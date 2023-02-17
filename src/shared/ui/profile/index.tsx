@@ -12,8 +12,6 @@ export const Profile = () => {
 
   const { state, dispatch } = useStateContext();
 
-  console.log(state, 'state');
-
   const logoutMutation = useLogoutMutation();
 
   const logout = () => {

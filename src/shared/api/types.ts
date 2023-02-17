@@ -37,3 +37,7 @@ export type ConfirmAccount = {
   clientId: string;
   token: string;
 };
+
+export type Folder = {
+  name: string;
+};
