@@ -29,9 +29,9 @@ export const App = () => {
       <React.Suspense fallback={<Spin size='large' />}>
         <ThemeProvider>
           <AuthContextProvider>
-            {/* <AuthMiddleware> */}
-            <AppRoutes />
-            {/* </AuthMiddleware> */}
+            <AuthMiddleware>
+              <AppRoutes />
+            </AuthMiddleware>
           </AuthContextProvider>
         </ThemeProvider>
 

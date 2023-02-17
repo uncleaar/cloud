@@ -11,7 +11,7 @@ type AuthMiddlewareProps = {
 export const AuthMiddleware: React.FC<AuthMiddlewareProps> = ({ children }) => {
   const [name] = useLocalStorage<{}>('client');
 
-  if (!name) {
+  if (name) {
     return <ScreenLoader />;
   }
 

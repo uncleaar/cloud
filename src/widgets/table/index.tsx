@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
-import { Button, Modal, Space, Table, Tag } from 'antd';
+import { Button, Modal, Space, Spin, Table, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { DeleteOutlined, FolderAddOutlined } from '@ant-design/icons';
-import { useForm } from 'react-hook-form';
+import { DeleteOutlined, FolderAddOutlined, LoadingOutlined } from '@ant-design/icons';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 import styles from './Table.module.scss';
 import { InputField } from '@shared/ui';
 import { useQuery } from '@tanstack/react-query';
-import { getClassifications } from '@shared/api';
+import { Folder, getClassifications } from '@shared/api';
 import SpinFC from 'antd/es/spin';
+import { useCreateFolderMutation } from '@hooks';
+import { toast } from 'react-toastify';
 
 interface DataType {
   key: string;
   name: string;
   last_modified: string;
 }
+
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 const columns: ColumnsType<DataType> = [
   {
@@ -54,7 +58,7 @@ export const TableField: React.FC = () => {
     watch,
     control,
     formState: { errors }
-  } = useForm();
+  } = useForm<Folder>();
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -68,23 +72,46 @@ export const TableField: React.FC = () => {
     setIsModalOpen(false);
   };
 
-  const onSubmit = (values: any) => {
-    console.log(values, 'values');
+  const { mutate, isLoading: isLoadingCreateFolder } = useCreateFolderMutation({
+    options: {
+      onSuccess: (data) => {
+        toast.success(data.status.code);
+        refetch();
+      },
+
+      onError: (data) => {
+        toast.error(data.response.data.status.description);
+      }
+    }
+  });
+
+  const onSubmit: SubmitHandler<Folder> = (name: any) => {
+    mutate(name);
   };
 
-  if (isLoading) return <p>loading</p>;
-  console.log(data, 'data');
+  if (isLoading) return <Spin indicator={antIcon} />;
 
   return (
     <div className={styles.table}>
       <Modal
-        title='Sure you want to accept?'
+        title='Create classification'
         open={isModalOpen}
-        onOk={handleOk}
+        centered
+        footer={null}
         onCancel={handleCancel}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputField control={control} name='name' size='large' placeholder='Name' type='text' />
+
+          <div className={styles.buttons}>
+            <Button onClick={handleCancel} className={styles.cancel}>
+              Cancel
+            </Button>
+
+            <Button htmlType='submit' loading={isLoadingCreateFolder} className={styles.confirm}>
+              Confirm
+            </Button>
+          </div>
         </form>
       </Modal>
       <div className={styles.top}>
