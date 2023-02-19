@@ -1,14 +1,16 @@
-import React from 'react';
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ConfigProvider, Spin } from 'antd';
+import React from 'react';
 import { CookiesProvider } from 'react-cookie';
-import { AppRoutes } from './routes/routes';
-import 'react-toastify/dist/ReactToastify.css';
-import { AuthMiddleware } from '@middleware';
-import { ThemeProvider } from '@context/theme';
-import { AuthContextProvider } from '@context/store';
 
+import { AuthContextProvider } from '@context/store';
+import { ThemeProvider } from '@context/theme';
+import { AuthMiddleware } from '@middleware';
+import { QueryClient,QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+import { AppRoutes } from './routes/routes';
+
+import 'react-toastify/dist/ReactToastify.css';
 import './styles/globals.css';
 
 const queryClient = new QueryClient({
@@ -23,8 +25,7 @@ const queryClient = new QueryClient({
   }
 });
 
-export const App = () => {
-  return (
+export const App = () => (
     <QueryClientProvider client={queryClient}>
       <React.Suspense fallback={<Spin size='large' />}>
         <ThemeProvider>
@@ -39,4 +40,3 @@ export const App = () => {
       </React.Suspense>
     </QueryClientProvider>
   );
-};

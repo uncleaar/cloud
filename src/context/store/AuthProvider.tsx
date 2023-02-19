@@ -1,5 +1,7 @@
+import { useContext, useEffect, useMemo, useReducer } from 'react';
+
 import { Client } from '@shared/api';
-import { useContext, useEffect, useReducer } from 'react';
+
 import { AuthContext, stateReducer } from './AuthContext';
 
 type StateContextProviderProps = { children: React.ReactNode };
@@ -20,7 +22,13 @@ const getInitialState = () => {
 export const AuthContextProvider = ({ children }: StateContextProviderProps) => {
   const [state, dispatch] = useReducer(stateReducer, INITIAL_STORE, getInitialState);
 
-  const value = { state, dispatch };
+  const value = useMemo(
+    () => ({
+      state,
+      dispatch
+    }),
+    [state]
+  );
 
   useEffect(() => {
     localStorage.setItem('client', JSON.stringify(state));

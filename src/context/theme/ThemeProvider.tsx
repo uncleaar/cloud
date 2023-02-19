@@ -1,8 +1,8 @@
 import React from 'react';
 
 import type { Theme } from './ThemeContext';
-import { ThemeContextProps } from './ThemeContext';
-import { ThemeContext } from './ThemeContext';
+import { ThemeContext,ThemeContextProps  } from './ThemeContext';
+
 
 interface ThemeProviderProps {
   children: React.ReactNode;

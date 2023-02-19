@@ -9,11 +9,9 @@ interface LinkItemProps {
   path?: string;
 }
 
-export const LinkItem: FC<LinkItemProps> = ({ icon, text, path }) => {
-  return (
+export const LinkItem: FC<LinkItemProps> = ({ icon, text, path }) => (
     <div className={styles.item}>
       {icon}
       {path && <Link to={path}>{text}</Link>}
     </div>
   );
-};

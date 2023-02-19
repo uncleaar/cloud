@@ -1,12 +1,13 @@
-import { DeleteOutlined, ExclamationCircleFilled } from '@ant-design/icons';
 import { Modal } from 'antd';
-import { useDeleteFolderMutation } from '@hooks';
 import { FC, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import styles from './DeleteIcon.module.scss';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { DeleteOutlined, ExclamationCircleFilled } from '@ant-design/icons';
+import { useDeleteFolderMutation } from '@hooks';
 import { deleteFolder } from '@shared/api';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+import styles from './DeleteIcon.module.scss';
 
 type Text = {
   entityId: number;

@@ -1,8 +1,8 @@
+import React from 'react';
 import { useCookies } from 'react-cookie';
 
-import React from 'react';
-import { ScreenLoader } from '@widgets';
 import { useLocalStorage } from '@hooks';
+import { ScreenLoader } from '@widgets';
 
 type AuthMiddlewareProps = {
   children: React.ReactElement;

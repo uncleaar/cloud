@@ -24,8 +24,7 @@ export const InputField: FC<InputProps> = ({
   id,
   help,
   errors
-}) => {
-  return (
+}) => (
     <Form.Item validateStatus={id} help={help}>
       <Controller
         control={control}
@@ -37,4 +36,3 @@ export const InputField: FC<InputProps> = ({
       {errors && <div>{errors}</div>}
     </Form.Item>
   );
-};

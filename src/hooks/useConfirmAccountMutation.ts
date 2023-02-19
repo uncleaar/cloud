@@ -1,5 +1,4 @@
 import { confirmAccount } from '@shared/api';
-
 import { useMutation } from '@tanstack/react-query';
 
 interface useConfirmAccountParams {

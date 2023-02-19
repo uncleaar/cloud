@@ -1,19 +1,18 @@
+import { Button, Divider, Form,Image, Input, Typography } from 'antd';
 import React, { FC } from 'react';
-import { Input, Image, Typography, Button, Divider, Form } from 'antd';
+import { Controller,useForm  } from 'react-hook-form';
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+
+import { useStateContext } from '@context/store';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { EmailSvg, LogoSvg, PasswordSvg, InputField, Title } from '@shared/ui';
+import { useRegisterMutation } from '@hooks';
+import { EmailSvg, InputField, LogoSvg, PasswordSvg, Title } from '@shared/ui';
+import { RegisterInput, registerSchema } from '@shared/validation';
 
 import RegisterImg from '../../app/assets/images/register.png';
 
-import { useForm } from 'react-hook-form';
-import { Controller } from 'react-hook-form';
-import { RegisterInput, registerSchema } from '@shared/validation';
-import { useNavigate } from 'react-router';
-import { useRegisterMutation } from '@hooks';
-import { toast } from 'react-toastify';
-
 import styles from './SignUp.module.scss';
-import { useStateContext } from '@context/store';
 
 type RegisterUser = {
   mail: string;

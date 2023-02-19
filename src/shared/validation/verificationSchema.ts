@@ -1,4 +1,4 @@
-import { string, object, TypeOf } from 'zod';
+import { object, string, TypeOf } from 'zod';
 
 export const verificationSchema = object({
   token: string().nullable()

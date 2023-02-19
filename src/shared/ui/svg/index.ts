@@ -1,3 +1,3 @@
 export * from './email';
-export * from './password';
 export * from './logo';
+export * from './password';

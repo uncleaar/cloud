@@ -3,5 +3,6 @@ export const ROUTES = {
   SIGN_IN: 'sign-in',
   SIGN_UP: 'sign-up',
   PROFILE: '/profile',
-  VERIFICATION: '/verification'
+  VERIFICATION: '/verification',
+  CLASSIFICATION: '/classification/:id'
 };

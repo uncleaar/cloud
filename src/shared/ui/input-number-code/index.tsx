@@ -8,8 +8,7 @@ interface VerificationCodeInputProps {
   rules?: any;
 }
 
-export const VerificationCodeInput = ({ name, control, rules }: VerificationCodeInputProps) => {
-  return (
+export const VerificationCodeInput = ({ name, control, rules }: VerificationCodeInputProps) => (
     <Controller
       name={name}
       control={control}
@@ -29,4 +28,3 @@ export const VerificationCodeInput = ({ name, control, rules }: VerificationCode
       )}
     />
   );
-};

@@ -1,5 +1,7 @@
-import { Client } from '@shared/api';
 import { createContext } from 'react';
+
+import { Client } from '@shared/api';
+
 type State = {
   authUser: Client | null;
 };

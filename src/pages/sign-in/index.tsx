@@ -1,19 +1,18 @@
+import { Button, Divider, Form,Image, Typography } from 'antd';
 import { FC, useContext } from 'react';
-import { Image, Typography, Button, Divider, Form } from 'antd';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { Link,useLocation,useNavigate  } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { zodResolver } from '@hookform/resolvers/zod';
 
+import { useStateContext } from '@context/store';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useLoginMutation } from '@hooks';
 import { EmailSvg, InputField, LogoSvg, PasswordSvg } from '@shared/ui';
 import { LoginInput, loginSchema } from '@shared/validation';
+
 import LoginImg from '../../app/assets/images/login.png';
 
 import styles from './SignIn.module.scss';
-import { Link } from 'react-router-dom';
-import { useLoginMutation } from '@hooks';
-
-import { useStateContext } from '@context/store';
 
 type LoginUser = {
   mail: string;

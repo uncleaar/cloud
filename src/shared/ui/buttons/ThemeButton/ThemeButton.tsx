@@ -1,5 +1,6 @@
-import { useTheme } from '@hooks';
 import { Button } from 'antd';
+
+import { useTheme } from '@hooks';
 
 import styles from './ThemeButton.module.scss';
 

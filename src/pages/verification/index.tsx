@@ -1,15 +1,16 @@
-import { useStateContext } from '@context/store';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useConfirmAccountMutation } from '@hooks';
-import { ConfirmAccount } from '@shared/api';
-import { InputField, Title, VerificationCodeInput } from '@shared/ui';
-import { VerificationInp, verificationSchema } from '@shared/validation';
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import VerificationInput from 'react-verification-input';
+
+import { useStateContext } from '@context/store';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useConfirmAccountMutation } from '@hooks';
+import { ConfirmAccount } from '@shared/api';
+import { InputField, Title, VerificationCodeInput } from '@shared/ui';
+import { VerificationInp, verificationSchema } from '@shared/validation';
 
 import styles from './Verification.module.scss';
 

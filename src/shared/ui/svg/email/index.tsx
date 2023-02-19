@@ -1,7 +1,6 @@
 import React from 'react';
 
-export const EmailSvg = () => {
-  return (
+export const EmailSvg = () => (
     <svg width='26' height='25' viewBox='0 0 26 25' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <g clipPath='url(#clip0_2_179)'>
         <path
@@ -21,4 +20,3 @@ export const EmailSvg = () => {
       </defs>
     </svg>
   );
-};

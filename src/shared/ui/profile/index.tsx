@@ -1,9 +1,10 @@
-import { useNavigate } from 'react-router-dom';
 import { Avatar, Button, Popover } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
 import { UserOutlined } from '@ant-design/icons';
-import { ThemeButton } from '@shared/ui';
-import { useLogoutMutation } from '@hooks';
 import { useStateContext } from '@context/store';
+import { useLogoutMutation } from '@hooks';
+import { ThemeButton } from '@shared/ui';
 
 import styles from './Profile.module.scss';
 

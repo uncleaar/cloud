@@ -1,7 +1,8 @@
-import { AxiosRequestConfig } from 'axios';
-import { ConfirmAccount, Folder, RequestFolder, RootObjectSignIn, RootObjectSignUp } from './types';
+import axios, { AxiosRequestConfig } from 'axios';
+
 import { LoginInput, RegisterInput } from '@shared/validation';
-import axios from 'axios';
+
+import { ConfirmAccount, Folder, RequestFolder, RootObjectSignIn, RootObjectSignUp } from './types';
 
 const BASE_URL = 'http://localhost:8090/api/v1/';
 

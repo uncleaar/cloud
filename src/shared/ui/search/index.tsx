@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
 import { Input } from 'antd';
+import React, { FC } from 'react';
 
 const { Search } = Input;
 

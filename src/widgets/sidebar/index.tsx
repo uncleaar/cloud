@@ -1,15 +1,14 @@
-import React, { FC } from 'react';
 import { Layout } from 'antd';
-
-const { Sider } = Layout;
+import React, { FC } from 'react';
 
 import styles from './Sidebar.module.scss';
+
+const { Sider } = Layout;
 
 type SidebarProps = {
   children: React.ReactNode;
 };
-export const Sidebar: FC<SidebarProps> = ({ children }) => {
-  return (
+export const Sidebar: FC<SidebarProps> = ({ children }) => (
     <Sider
       theme='light'
       breakpoint='xl'
@@ -20,4 +19,3 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
       {children}
     </Sider>
   );
-};
