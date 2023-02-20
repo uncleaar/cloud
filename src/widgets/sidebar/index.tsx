@@ -9,13 +9,7 @@ type SidebarProps = {
   children: React.ReactNode;
 };
 export const Sidebar: FC<SidebarProps> = ({ children }) => (
-    <Sider
-      theme='light'
-      breakpoint='xl'
-      width={320}
-      className={styles.sidebar}
-      style={{ background: '#f5f5f5' }}
-    >
-      {children}
-    </Sider>
-  );
+  <Sider breakpoint='xl' width={320} className={styles.sidebar} style={{ background: '#f5f5f5' }}>
+    {children}
+  </Sider>
+);

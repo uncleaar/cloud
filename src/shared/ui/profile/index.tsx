@@ -1,4 +1,5 @@
 import { Avatar, Button, Popover } from 'antd';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { UserOutlined } from '@ant-design/icons';
@@ -20,6 +21,14 @@ export const Profile = () => {
     logoutMutation.mutate();
     dispatch({ type: 'LOGOUT', payload: null });
   };
+
+  const [theme, setTheme] = useState('light');
+
+  const handleThemeChange = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+  };
+
   return (
     <div>
       <div>
@@ -31,6 +40,7 @@ export const Profile = () => {
               <div className={styles.user}>
                 {state.authUser && state.authUser.mail}
                 <ThemeButton />
+                <Button onClick={handleThemeChange}>Switch Theme</Button>
               </div>
               <Button onClick={logout}>Logout</Button>
             </div>

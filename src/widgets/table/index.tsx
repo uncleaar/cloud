@@ -3,21 +3,21 @@ import SpinFC from 'antd/es/spin';
 import type { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { DeleteOutlined, FolderAddOutlined, LoadingOutlined } from '@ant-design/icons';
+import { DeleteOutlined, FolderAddOutlined, FolderFilled, FolderOutlined, FolderViewOutlined, LoadingOutlined } from '@ant-design/icons';
 import { useCreateFolderMutation } from '@hooks';
 import { Folder, getClassifications } from '@shared/api';
 import { DeleteIcon, InputField } from '@shared/ui';
 import { useQuery } from '@tanstack/react-query';
 
 import styles from './Table.module.scss';
-import { Link } from 'react-router-dom';
 
 interface DataType {
   key: string;
   name: string;
-  last_modified: string;
+  entityId: number;
 }
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -27,7 +27,13 @@ const columns: ColumnsType<DataType> = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    render: (text) => <Link to={`classification/${text}`}>{text}</Link>,
+    render: (text, { entityId }) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <FolderFilled style={{ fontSize: '25px', paddingRight: '20px' }} />
+        <Link to={`classification/${entityId}`}>{text}</Link>
+      </div>
+    ),
+
     sorter: (a, b) => a.name.length - b.name.length
   },
 

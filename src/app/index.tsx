@@ -5,13 +5,13 @@ import { CookiesProvider } from 'react-cookie';
 import { AuthContextProvider } from '@context/store';
 import { ThemeProvider } from '@context/theme';
 import { AuthMiddleware } from '@middleware';
-import { QueryClient,QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { AppRoutes } from './routes/routes';
 
 import 'react-toastify/dist/ReactToastify.css';
-import './styles/globals.css';
+import './styles/globals.scss';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,8 +25,22 @@ const queryClient = new QueryClient({
   }
 });
 
+const themes = {
+  dark: {
+    '@primary-color': '#1890ff',
+    '@text-color': '#fff',
+    '@border-color-base': '#666'
+  },
+  light: {
+    '@primary-color': '#1890ff',
+    '@text-color': '#333',
+    '@border-color-base': '#d9d9d9'
+  }
+};
+
 export const App = () => (
-    <QueryClientProvider client={queryClient}>
+  <QueryClientProvider client={queryClient}>
+    <ConfigProvider>
       <React.Suspense fallback={<Spin size='large' />}>
         <ThemeProvider>
           <AuthContextProvider>
@@ -38,5 +52,6 @@ export const App = () => (
 
         <ReactQueryDevtools initialIsOpen={false} />
       </React.Suspense>
-    </QueryClientProvider>
-  );
+    </ConfigProvider>
+  </QueryClientProvider>
+);
