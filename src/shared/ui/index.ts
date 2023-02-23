@@ -7,4 +7,5 @@ export * from './logo';
 export * from './profile';
 export * from './search';
 export * from './svg';
+export * from './table';
 export * from './title';

@@ -1,4 +1,4 @@
-import { TableField } from '@widgets';
+import { TableField } from '@shared/ui';
 
 const HomePage = () => <TableField />;
 

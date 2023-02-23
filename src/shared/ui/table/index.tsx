@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { DeleteOutlined, FolderAddOutlined, FolderFilled, FolderOutlined, FolderViewOutlined, LoadingOutlined } from '@ant-design/icons';
+import { FolderAddOutlined, FolderFilled, LoadingOutlined } from '@ant-design/icons';
 import { useCreateFolderMutation } from '@hooks';
 import { Folder, getClassifications } from '@shared/api';
 import { DeleteIcon, InputField } from '@shared/ui';
@@ -64,10 +64,6 @@ export const TableField: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -87,6 +83,7 @@ export const TableField: React.FC = () => {
 
   const onSubmit: SubmitHandler<Folder> = (name: any) => {
     mutate(name);
+    setIsModalOpen(false);
   };
 
   if (isLoading) return <Spin indicator={antIcon} />;
