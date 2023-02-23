@@ -4,7 +4,7 @@ import { IntlContext } from './IntlContext';
 
 interface IntlProviderProps {
   locale: 'RU' | 'EN' | 'KZ';
-  messages: Record<string, any>;
+  messages: Record<string, string>;
   children: React.ReactNode;
 }
 

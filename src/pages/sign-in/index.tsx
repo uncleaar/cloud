@@ -7,8 +7,8 @@ import { toast } from 'react-toastify';
 
 import { useStateContext } from '@context/store';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useIntl, useLoginMutation } from '@hooks';
-import { EmailSvg, InputField, LogoSvg, PasswordSvg } from '@shared/ui';
+import { useLoginMutation } from '@hooks';
+import { EmailSvg, InputField, IntlText, LogoSvg, PasswordSvg } from '@shared/ui';
 import { LoginInput, loginSchema } from '@shared/validation';
 
 import LoginImg from '../../app/assets/images/login.png';
@@ -23,9 +23,6 @@ type LoginUser = {
 const LoginPage: FC = () => {
   const location = useLocation();
 
-  const intl = useIntl();
-
-  console.log(intl, 'intl');
   const navigate = useNavigate();
 
   const { dispatch } = useStateContext();
@@ -79,16 +76,7 @@ const LoginPage: FC = () => {
             )}
             className={styles.form_inner}
           >
-            <InputField
-              control={control}
-              name='mail'
-              icon={<EmailSvg />}
-              size='large'
-              placeholder='mail'
-              type='email'
-              id={errors.mail?.message ? 'error' : 'success'}
-              help={errors.mail?.message}
-            />
+            <InputField control={control} name='mail' icon={<EmailSvg />} size='large' placeholder='mail' type='email' id={errors.mail?.message ? 'error' : 'success'} help={errors.mail?.message} />
 
             <InputField
               control={control}
@@ -102,7 +90,7 @@ const LoginPage: FC = () => {
             />
 
             <Button className={styles.btn} size='large' htmlType='submit'>
-              {intl.messages['button.signIn']}
+              <IntlText pass='button.signIn' />
             </Button>
           </form>
 
