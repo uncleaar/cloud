@@ -1,12 +1,13 @@
-import { Button, Divider, Form,Image, Typography } from 'antd';
+import { Button, Divider, Form, Image, Typography } from 'antd';
+import { IntlContext } from 'i18n';
 import { FC, useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link,useLocation,useNavigate  } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useStateContext } from '@context/store';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLoginMutation } from '@hooks';
+import { useIntl, useLoginMutation } from '@hooks';
 import { EmailSvg, InputField, LogoSvg, PasswordSvg } from '@shared/ui';
 import { LoginInput, loginSchema } from '@shared/validation';
 
@@ -21,6 +22,10 @@ type LoginUser = {
 
 const LoginPage: FC = () => {
   const location = useLocation();
+
+  const intl = useIntl();
+
+  console.log(intl, 'intl');
   const navigate = useNavigate();
 
   const { dispatch } = useStateContext();
@@ -97,7 +102,7 @@ const LoginPage: FC = () => {
             />
 
             <Button className={styles.btn} size='large' htmlType='submit'>
-              Sign in
+              {intl.messages['button.signIn']}
             </Button>
           </form>
 

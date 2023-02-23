@@ -21,6 +21,7 @@ export default defineConfig({
     alias: {
       '@shared': path.resolve(__dirname, './src/shared'),
       '@shared/*': path.resolve(__dirname, './src/shared'),
+      '@i18n': path.resolve(__dirname, './src/i18n'),
       '@shared/validation': path.resolve(__dirname, './src/shared/validation'),
       '@shared/constants': path.resolve(__dirname, './src/shared/constants'),
       '@shared/api': path.resolve(__dirname, './src/shared/api'),

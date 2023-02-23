@@ -19,16 +19,30 @@ export const AuthApp = () => (
 );
 
 export const AppRoutes = () => (
-  <Wrapper>
+  <>
     <Routes>
       <Route>
-        <Route path='' element={<HomePage />} />
+        <Route
+          path=''
+          element={
+            <Wrapper>
+              <HomePage />
+            </Wrapper>
+          }
+        />
       </Route>
       <Route path={ROUTES.SIGN_IN} element={<LoginPage />} />
       <Route path={ROUTES.SIGN_UP} element={<RegisterPage />} />
       <Route path={ROUTES.VERIFICATION} element={<VerificationPage />} />
-      <Route path={ROUTES.CLASSIFICATION} element={<ClassificationPage />} />
+      <Route
+        path={ROUTES.CLASSIFICATION}
+        element={
+          <Wrapper>
+            <ClassificationPage />
+          </Wrapper>
+        }
+      />
     </Routes>
     <ToastContainer />
-  </Wrapper>
+  </>
 );

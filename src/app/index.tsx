@@ -1,10 +1,8 @@
-import { ConfigProvider, Spin } from 'antd';
+import { Spin } from 'antd';
 import React from 'react';
-import { CookiesProvider } from 'react-cookie';
 
 import { AuthContextProvider } from '@context/store';
 import { ThemeProvider } from '@context/theme';
-import { AuthMiddleware } from '@middleware';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
@@ -12,6 +10,7 @@ import { AppRoutes } from './routes/routes';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/globals.scss';
+import { IntlProvider } from '@i18n';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -40,18 +39,16 @@ const themes = {
 
 export const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ConfigProvider>
-      <React.Suspense fallback={<Spin size='large' />}>
+    <React.Suspense fallback={<Spin size='large' />}>
+      <IntlProvider locale='RU' messages={{ 'button.signIn': 'Sign In' }}>
         <ThemeProvider>
           <AuthContextProvider>
-            {/* <AuthMiddleware> */}
             <AppRoutes />
-            {/* </AuthMiddleware> */}
           </AuthContextProvider>
         </ThemeProvider>
+      </IntlProvider>
 
-        <ReactQueryDevtools initialIsOpen={false} />
-      </React.Suspense>
-    </ConfigProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </React.Suspense>
   </QueryClientProvider>
 );

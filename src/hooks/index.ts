@@ -1,6 +1,7 @@
 export * from './useConfirmAccountMutation';
 export * from './useCreateFolderMutation';
 export * from './useDeleteFolderMutation';
+export * from './useIntl';
 export * from './useLocalStorage';
 export * from './useLoginMutation';
 export * from './useLogoutMutation';
