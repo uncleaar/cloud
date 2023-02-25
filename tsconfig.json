@@ -18,6 +18,7 @@
     "baseUrl": "./src",
       "paths": {
       "@shared": ["./shared" ],
+      "@app": ["./app" ],
       "@shared/constants": [ "./shared/constants"],
       "@shared/ui": [ "./shared/ui"],
       "@shared/services": ["./shared/services"],
@@ -27,6 +28,7 @@
       "@hooks": ["./hooks"],
       "@middleware": [ "./middleware"],
       "@context": ["./context"],
+      "@helpers": ["./helpers"],
       "@context/*": [ "./context/*"],
       "@pages": [ "./pages" ],
       "@i18n": [ "./i18n" ],

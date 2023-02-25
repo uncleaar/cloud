@@ -1,5 +1,4 @@
 module.exports = {
-  allowExpressions: true,
   env: {
     browser: true,
     es2021: true
@@ -23,6 +22,7 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'prettier', 'simple-import-sort'],
   rules: {
+    'no-restricted-syntax': ['error', 'FunctionExpression', 'WithStatement', "BinaryExpression[operator='in"],
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 0,
     '@typescript-eslint/no-shadow': 0,

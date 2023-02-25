@@ -6,9 +6,7 @@ interface useConfirmAccountParams {
   token: string;
 }
 
-export const useConfirmAccountMutation = (
-  settings?: RequestMutationSettings<typeof confirmAccount>
-) =>
+export const useConfirmAccountMutation = (settings?: RequestMutationSettings<typeof confirmAccount>) =>
   useMutation(
     ['useConfirmAccount'],
     (params: RequestParams<useConfirmAccountParams>) => confirmAccount(params),

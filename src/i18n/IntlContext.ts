@@ -1,8 +1,8 @@
 import React from 'react';
 
 export interface IntlContextProps {
-  locale: 'RU' | 'EN' | 'KZ';
+  locale: 'ru' | 'en';
   messages: Record<string, string>;
 }
 
-export const IntlContext = React.createContext<IntlContextProps>({ locale: 'RU', messages: {} });
+export const IntlContext = React.createContext<IntlContextProps>({ locale: 'ru', messages: {} });

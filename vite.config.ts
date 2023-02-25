@@ -20,6 +20,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@shared': path.resolve(__dirname, './src/shared'),
+      '@app': path.resolve(__dirname, './src/app'),
       '@shared/*': path.resolve(__dirname, './src/shared'),
       '@i18n': path.resolve(__dirname, './src/i18n'),
       '@shared/validation': path.resolve(__dirname, './src/shared/validation'),
@@ -29,6 +30,7 @@ export default defineConfig({
       '@shared/ui': path.resolve(__dirname, './src/shared/ui'),
       '@widgets': path.resolve(__dirname, './src/widgets'),
       '@context': path.resolve(__dirname, './src/context'),
+      '@helpers': path.resolve(__dirname, './src/helpers'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@middleware': path.resolve(__dirname, './src/middleware'),
       '@pages': path.resolve(__dirname, './src/pages')

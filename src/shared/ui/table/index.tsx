@@ -13,6 +13,7 @@ import { DeleteIcon, InputField } from '@shared/ui';
 import { useQuery } from '@tanstack/react-query';
 
 import styles from './Table.module.scss';
+import { getLocale, getMessages } from '@helpers';
 
 interface DataType {
   key: string;
