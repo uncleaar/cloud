@@ -1,4 +1,4 @@
-import { Spin } from 'antd';
+import { message, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 import { AuthContextProvider } from '@context/store';
@@ -31,8 +31,10 @@ export const App = () => {
   const locale = getLocale();
 
   useEffect(() => {
-    getMessages(locale).then((messages) => {
+    const preloads = [getMessages(locale)];
+    Promise.all(preloads).then(([messages]) => {
       setMessages(messages);
+      console.log(messages.default, 'messages');
       setIsLoading(false);
     });
   }, []);

@@ -100,7 +100,7 @@ const LoginPage: FC = () => {
             />
 
             <Button className={styles.btn} size='large' htmlType='submit'>
-              <IntlText path='button.signIn' values={{ test: 123123 }} />
+              <IntlText path='button.signIn' />
             </Button>
           </form>
 
@@ -108,7 +108,7 @@ const LoginPage: FC = () => {
 
           <Link to='/sign-up'>
             <Button className={styles.btn_sign} size='large'>
-              Sign up
+              <IntlText path='button.signUp' />
             </Button>
           </Link>
 

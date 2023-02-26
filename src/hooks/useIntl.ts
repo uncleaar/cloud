@@ -4,7 +4,7 @@ import { IntlContext } from '@i18n';
 
 export interface TranslateMessage {
   path: string;
-  values: Record<string, string | number | boolean>;
+  values?: Record<string, string | number | boolean>;
 }
 
 export const useIntl = () => {
@@ -24,5 +24,5 @@ export const useIntl = () => {
     return translate;
   };
 
-  return { ...intl, translateMessage };
+  return { locale: intl.locale, translateMessage };
 };

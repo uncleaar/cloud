@@ -1,4 +1,4 @@
-const ACCEPT_LOCALES = ['ru', 'en'] as const;
+const ACCEPT_LOCALES = ['ru', 'en-US'] as const;
 
 export const DEFAULT_LOCALE = ACCEPT_LOCALES[0];
 

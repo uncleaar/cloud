@@ -1,7 +1,7 @@
 import React from 'react';
 
 export interface IntlContextProps {
-  locale: 'ru' | 'en';
+  locale: 'ru' | 'en-US';
   messages: Record<string, string>;
 }
 
