@@ -33,8 +33,7 @@ export const App = () => {
   useEffect(() => {
     const preloads = [getMessages(locale)];
     Promise.all(preloads).then(([messages]) => {
-      setMessages(messages);
-      console.log(messages.default, 'messages');
+      setMessages(messages.default);
       setIsLoading(false);
     });
   }, []);
